@@ -38,16 +38,53 @@ class DepartmentManager (Manager):
 
 
 def main():
-    Manager = input("Enter the name of the manager ")
-    Manager_id = str(input("Enter the Manager ID "))
-    Department_name = input("Enter the name of the department ")
-    No_employees = str(input("Enter the No of Employees "))
 
-    info = DepartmentManager(Manager, Manager_id, Department_name, No_employees)
+    manager_registry = {}
 
-    print(info.get_man_name())
-    print(info.get_man_id())
-    print(info.get_dep_name())
+    while True:
+
+        task = int(input("Enter 1 if you want to add Managers \n" 
+                "Enter 2 if you want to seach for managers \n"
+                "Enter 3 to exit \n" ))
+    
+        if task == 1:
+        
+            Manager = input("Enter the name of the manager ")
+            Manager_id = str(input("Enter the Manager ID "))
+            Department_name = input("Enter the name of the department ")
+            No_employees = str(input("Enter the No of Employees "))
+
+            dept_manager = DepartmentManager(Manager, Manager_id, Department_name, No_employees)
+
+            manager_registry[Manager_id] = dept_manager
+            print(f"\nSuccessfully saved Manager {Manager_id} to the dictionary!")
+
+            
+
+        elif task == 2:
+            search_id = input("Enter the Manager ID to be searched ")
+
+
+            if search_id in manager_registry:
+
+                retrieved_manager = manager_registry[search_id]
+
+                print("\n--- Match Found ---")
+                print(f"Name:        {retrieved_manager.get_man_name()}")
+                print(f"Department:  {retrieved_manager.get_dep_name()}")
+                print(f"No of Empployees: {retrieved_manager.get_no_emp()}")
+            else:
+                print("Manager ID not found in the dictionary.")
+
+        elif task == 3:
+            break
+
+                
+
+    
+
+
+    
 
 if __name__ == "__main__":
     main()
